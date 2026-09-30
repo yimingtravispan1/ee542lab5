@@ -1,6 +1,40 @@
 # EE542 Lab 5 Report: Mobile Phone IoT Network
+## Individual Setup Contribution
 
-## Objective
+The cloud-side environment and the initial end-to-end phone test were completed before the multi-phone integration stage.
+
+The setup work included:
+
+- Creating the AWS networking environment and launching an Ubuntu EC2 instance.
+- Installing OpenJDK 17, PostgreSQL 16, and ThingsBoard Community Edition.
+- Creating the PostgreSQL database used by ThingsBoard and verifying that the ThingsBoard service was running correctly.
+- Creating the initial ThingsBoard device, `JYU-Phone`.
+- Configuring Android OwnTracks to send HTTP telemetry to ThingsBoard.
+- Verifying OwnTracks telemetry fields including `lat`, `lon`, `acc`, `alt`, and `batt`.
+- Creating an OpenStreetMap dashboard and confirming that the phone location could be displayed using the `lat` and `lon` telemetry keys.
+
+### Android OwnTracks Compatibility Issue
+
+During Android testing, OwnTracks repeatedly retried messages because it could not correctly handle the empty HTTP response body returned after a successful ThingsBoard telemetry POST.
+
+To solve this issue, a lightweight HTTP proxy was added on the EC2 instance. The proxy forwards the telemetry payload to ThingsBoard and returns a valid empty JSON array (`[]`) to OwnTracks.
+
+After this adjustment, the retry queue was cleared and location telemetry could be uploaded normally.
+
+### Team Handoff
+
+After the single-phone pipeline was verified, the cloud environment was ready for the rest of the team.
+
+Each team member only needs to:
+
+1. Create a separate ThingsBoard device.
+2. Use the corresponding device token in OwnTracks.
+3. Verify that `lat` and `lon` appear in **Latest Telemetry**.
+4. Add the device to the shared map dashboard.
+
+The PostgreSQL password and SSH private key are not required for normal phone-side testing or dashboard configuration.
+
+## Custom App Objective
 
 Build an end-to-end IoT system that sends location data from mobile phones running OwnTracks to a ThingsBoard Community Edition server on an AWS EC2 instance. Display live telemetry on a map and develop a custom mapping solution using data from multiple phones.
 
