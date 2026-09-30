@@ -1,3 +1,12 @@
+"""
+OwnTracks to ThingsBoard HTTP compatibility proxy.
+
+This proxy forwards OwnTracks telemetry to ThingsBoard
+and returns a valid JSON response [] to avoid the
+Android OwnTracks HTTP response parsing issue.
+
+EE542 Lab 5
+"""
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import urllib.request
 
