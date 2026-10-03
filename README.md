@@ -9,8 +9,6 @@ This project connects mobile phones running OwnTracks to a ThingsBoard Community
 | [report.md](report.md) | Setup contribution, telemetry verification results, application design, and observed behavior. |
 | [proxy/owntracks_proxy.py](proxy/owntracks_proxy.py) | HTTP compatibility proxy for Android OwnTracks and ThingsBoard. |
 
-The dashboard and meetup-status configuration are described in the report; their configuration exports and calculation code are not included in this repository.
-
 ## System Overview
 
 Phones send HTTP telemetry to their ThingsBoard devices. Android phones that encounter the response-parsing issue described in the report can send through the compatibility proxy:
